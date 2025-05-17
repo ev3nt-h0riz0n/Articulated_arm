@@ -28,6 +28,6 @@ Y w górę
 X w prawo
 
 <h2>TO DO LIST</h2>
-* Ogarnąć w jaki sposób wgrać teksturę/zrobić kocią łapkę
+* Ogarnąć w jaki sposób wgrać teksturę/zrobić kocią łapkę/n
 * Ogarnąć w jaki sposób zrobić lepsze sterowanie - np guziczki suawki na boku
 * Ogarnąć sysem kolicji i pobieranie globalnej lokalizacji ramienia, żeby móc je przesuwać
