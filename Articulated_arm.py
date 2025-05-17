@@ -7,7 +7,7 @@ from OpenGL.GLU import *
 from OpenGL.GL import *
 
 def base():
-    glPushMatrix() #Te dwie funkcje są ważne!! Żeby obiekt cały czas nie zmieniał położenia przez glTranslatef
+    glPushMatrix() #Te dwie funkcje są ważne (glPopMatrix)!! Żeby obiekt cały czas nie zmieniał położenia przez glTranslatef
     quadric = gluNewQuadric() #Tworzymy obiekt do rysowania walca
     gluQuadricNormals(quadric, GLU_SMOOTH)  # Włączamy generowanie normalnych do cieniowania
 
@@ -44,7 +44,7 @@ def Segment1(): #Obrót regionalny wokół osi z
     glMaterialf(GL_FRONT, GL_SHININESS, 50.0)
     glRotatef(-90, 1, 0, 0)
     glTranslatef(0, 0, 0.1)
-    gluCylinder(quadric, 0.1, 0.1, 0.5, 32, 4)
+    gluCylinder(quadric, 0.2, 0.12, 0.5, 32, 4)
 
     gluDeleteQuadric(quadric)
     glPopMatrix()
@@ -54,12 +54,26 @@ def JointSegment2():
     quadric=gluNewQuadric()
     gluQuadricNormals(quadric, GLU_SMOOTH)
 
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 1.0, 0.0, 1.0))  # Żółty kolor
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 1.0, 0.0, 1.0)) 
     glMaterialfv(GL_FRONT, GL_SPECULAR, (1.0, 1.0, 1.0, 1.0))
     glMaterialf(GL_FRONT, GL_SHININESS, 50.0)
     gluSphere(quadric, 0.1, 32, 32)
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 0.0, 1.0, 1.0))
     glTranslatef(0.0, 0.0, 0.1)
     gluCylinder(quadric, 0.1, 0.1, 0.5, 32, 4)
+    gluDeleteQuadric(quadric)
+    glPopMatrix()
+
+def JointSegment3():
+    glPushMatrix()
+    quadric=gluNewQuadric()
+    gluQuadricNormals(quadric, GLU_SMOOTH)
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 1.0, 0.0, 1.0)) 
+    glMaterialfv(GL_FRONT, GL_SPECULAR, (1.0, 1.0, 1.0, 1.0))
+    glMaterialf(GL_FRONT, GL_SHININESS, 50.0)
+    gluSphere(quadric, 0.1, 32, 32)
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 0.0, 1.0, 1.0))
+    glTranslatef(0.0, 0.0, 0.1)
+    gluCylinder(quadric, 0.1, 0.1, 0.7, 32, 4)
     gluDeleteQuadric(quadric)
     glPopMatrix()
