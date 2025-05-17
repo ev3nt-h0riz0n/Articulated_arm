@@ -1,3 +1,8 @@
+### Projekt z przedmiotu programowanie obiektowe i grafika komputerowa
+### Autorzy: Dorian Neumann 198415, Antoni Sulkowski 197564
+### Plik, w którym zaimplementowane jest sterowanie różnymi segmentami robota.
+
+
 import pygame
 from pygame.locals import *
 
@@ -35,5 +40,15 @@ def Keys2(rot):
             rot+=2
     if(rot>=2):
         if keys[pygame.K_4]:
+            rot-=2
+    return rot
+
+def Keys3(rot):
+    keys=pygame.key.get_pressed()
+    if rot<=88:
+        if keys[pygame.K_6]:
+            rot+=2
+    if(rot>=2):
+        if keys[pygame.K_5]:
             rot-=2
     return rot
