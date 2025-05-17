@@ -20,10 +20,14 @@ Jako, że wykorzystałem świcenie światła (żeby rozróżnic, że to jest w 3
 trzeba ustawić konkretny rodzaj materiały, odbicie itd itp ://.
 
 <h2> OBRÓT SEGMENTÓW: </h2>
-Segment pierwszy ma zakres ruchu 0-360 stopni zgodnie z wymaganiami z zadania
-Co do drugiego segmentu wraz z stawem nie wiem jeszcze jaki dokładnie dobrać zakres ruchów
+Segment pierwszy ma zakres ruchu 0-360 stopni zgodnie z wymaganiami z zadania. Drugi i trzeci segment mają zakres 90 stopni.
 
 <h2>UKŁAD WSPÓŁRZĘDNYCH OPENGL </h2>
 Z w od ekranu
 Y w górę
 X w prawo
+
+<h2>TO DO LIST</h2>
+* Ogarnąć w jaki sposób wgrać teksturę/zrobić kocią łapkę
+* Ogarnąć w jaki sposób zrobić lepsze sterowanie - np guziczki suawki na boku
+* Ogarnąć sysem kolicji i pobieranie globalnej lokalizacji ramienia, żeby móc je przesuwać
