@@ -23,7 +23,7 @@ trzeba ustawić konkretny rodzaj materiały, odbicie itd itp ://.
 Segment pierwszy ma zakres ruchu 0-360 stopni zgodnie z wymaganiami z zadania
 Co do drugiego segmentu wraz z stawem nie wiem jeszcze jaki dokładnie dobrać zakres ruchów
 
-<h2>UKŁAD WSPÓŁRZĘDNYCH OPENGL M/h2>
+<h2>UKŁAD WSPÓŁRZĘDNYCH OPENGL </h2>
 Z w od ekranu
 Y w górę
 X w prawo
