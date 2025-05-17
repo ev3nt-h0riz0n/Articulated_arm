@@ -33,10 +33,8 @@ def light():
 
 #Ta funkcja odpowiada za całą symulację :)
 def init():
-    xrot=0
-    yrot=0
-    rot1=0
-    rot2=0
+    xrot, yrot, rot1, rot2, rot3 = 0,0,0,0,0
+
     pygame.init() 
     display = (800,600)
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
@@ -55,26 +53,32 @@ def init():
         xrot,yrot=keyscamera(xrot,yrot)
         rot1=Keys1(rot1)
         rot2=Keys2(rot2)
+        rot3=Keys3(rot3)
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-        glPushMatrix()
+        glPushMatrix() #Baza
         glRotatef(xrot, 1, 0, 0)
         glRotatef(yrot, 0, 1, 0)
         base()
 
-        glPushMatrix()
+        glPushMatrix() #1 Segment
         glRotatef(rot1, 0, 1, 0)
         Segment1()
 
-        glPushMatrix()
+        glPushMatrix() #2 Segment
         glTranslatef(0.0, 0.7, 0)
         glRotatef(rot2, -1, 0, 0)
         JointSegment2()
-        glPopMatrix()
 
-        glPopMatrix()
+        glPushMatrix() #3 Segment
+        glTranslatef(0, 0, 0.7)
+        glRotatef(rot3, 1, 0, 0)
+        JointSegment3()
 
-        glPopMatrix()
+        glPopMatrix() #Koniec 3 segmentu
+        glPopMatrix() #Koniec 2 segmentu
+        glPopMatrix() #Koniec 1 segmentu
+        glPopMatrix() #Koniec bazy
 
         pygame.display.flip()
         pygame.time.wait(25) #Funkcja zatrzymująca na chwilę program przed powtórzeniem pętli. Stosowane, aby program nie
@@ -85,7 +89,7 @@ print("""Symulacja ruchu robota typu articulated_arm"
       Aby poruszać obracać kamerą należy używać strzałek.
       Aby poruszać pierwszym segmentem używa się przycisków 1 oraz 2 (zakres ruchu 360 stopni)
       Aby poruszać drugim segmentem używa się przycisków 3 oraz 4 (zakres ruchu 90 stopni)
-
+      Aby poruszać trzecim segmentem używa się przycisków 5 oraz 6 (zakres ruchu 90 stopni)
 
 
       """)
