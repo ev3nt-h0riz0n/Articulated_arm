@@ -6,6 +6,7 @@
 #Import bibliotek potrzebnych do wykonania projektu
 import pygame
 import OpenGL
+import random
 from pygame.locals import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
@@ -34,7 +35,7 @@ def light():
 #Ta funkcja odpowiada za całą symulację :)
 def init():
     xrot, yrot, rot1, rot2, rot3 = 0,0,0,0,0
-
+    #Inicjalizacja okna i ustawienie pozycji operatora
     pygame.init() 
     display = (800,600)
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
@@ -44,6 +45,7 @@ def init():
     glRotatef(25, 1, 0, 0)
     light()
 
+    #Generowanie symulacji
     running = True
     while running:
         for event in pygame.event.get():
@@ -75,6 +77,11 @@ def init():
         glRotatef(rot3, 1, 0, 0)
         JointSegment3()
 
+        glPushMatrix() #Chwytak
+        glTranslatef(0,0.0,0.65)
+        EffectorJoint()
+
+        glPopMatrix() #Koniec chwytaka
         glPopMatrix() #Koniec 3 segmentu
         glPopMatrix() #Koniec 2 segmentu
         glPopMatrix() #Koniec 1 segmentu
@@ -89,7 +96,7 @@ print("""Symulacja ruchu robota typu articulated_arm"
       Aby poruszać obracać kamerą należy używać strzałek.
       Aby poruszać pierwszym segmentem używa się przycisków 1 oraz 2 (zakres ruchu 360 stopni)
       Aby poruszać drugim segmentem używa się przycisków 3 oraz 4 (zakres ruchu 90 stopni)
-      Aby poruszać trzecim segmentem używa się przycisków 5 oraz 6 (zakres ruchu 90 stopni)
+
 
 
       """)
