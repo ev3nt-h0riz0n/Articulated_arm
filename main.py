@@ -15,6 +15,21 @@ from OpenGL.GL import *
 from Articulated_arm import *
 from Controls import *
 
+def udp_listener(rot_vars):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind((UDP_IP, UDP_PORT))
+    while True:
+        data, _ = sock.recvfrom(1024)
+        cmd = data.decode()
+        if cmd.startswith("seg1:"):
+            rot_vars[0] = int(cmd.split(":")[1])
+        elif cmd.startswith("seg2:"):
+            rot_vars[1] = int(cmd.split(":")[1])
+        elif cmd.startswith("seg3:"):
+            rot_vars[2] = int(cmd.split(":")[1])
+
+UDP_IP = "127.0.0.1"
+UDP_PORT = 5006
 
 def light():
         #Oświetlenie (żeby było widać, że 3D)
@@ -108,14 +123,9 @@ def init():
         glPopMatrix()  # Koniec 1 segmentu
         glPopMatrix()  # Koniec bazy
 
-        glPopMatrix()  # End camera rotation
+        glPopMatrix()
 
-        # Switch to 2D mode for GUI overlay
-        glDisable(GL_DEPTH_TEST)
-        glDisable(GL_LIGHTING)
-        screen = pygame.display.get_surface()
-        glEnable(GL_DEPTH_TEST)
-        glEnable(GL_LIGHTING)
+
         pygame.display.flip()
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
             running = False
@@ -124,20 +134,5 @@ def init():
         #Powodował zbyt dużego obciążenia.
     pygame.quit()
 
-def udp_listener(rot_vars):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.bind((UDP_IP, UDP_PORT))
-    while True:
-        data, _ = sock.recvfrom(1024)
-        cmd = data.decode()
-        if cmd.startswith("seg1:"):
-            rot_vars[0] = int(cmd.split(":")[1])
-        elif cmd.startswith("seg2:"):
-            rot_vars[1] = int(cmd.split(":")[1])
-        elif cmd.startswith("seg3:"):
-            rot_vars[2] = int(cmd.split(":")[1])
-
-UDP_IP = "127.0.0.1"
-UDP_PORT = 5006
 
 init()
