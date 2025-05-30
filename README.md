@@ -24,7 +24,7 @@ Poza końcówką robota przechodzącą przez podłogę to tak, wszystko działa
 5. Czy zrobienie cieni jest proste?
 Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i pod złym kątem
 
-
+**wiadomość Dodo**
 Ogólnie to zacząłem projekt już coś tam kminić. ChatGPT mówi, że pygame jest spoko programem, żeby wyświetlało się okno. 
 Narysowałem na razie podstawę do robota, dwa segmenty i staw + w miarę opisałem co się dzieje. Idk czy na bieżąco powinniśmy robić dokumentacje, pewnie tak, ale chuj wie w jaki sposób.
 W każdym razie coś poszło do przodu, ale coś czuje, że plan z latającą rakietą może być marny XDD. Z wyglądem kociej łapki może jeszcze przejdzie,
