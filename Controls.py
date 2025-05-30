@@ -19,10 +19,11 @@ def keyscamera(xrot,yrot):
     if keys[pygame.K_RIGHT]:
         yrot+=1
     #Warunki, zeby za bardzo nie obracac kamerą
-    if(xrot<=-30):
-        xrot=-30
+    if(xrot<=-25):
+        xrot=-25
     if(xrot>=20):
         xrot=20
+
     #if t1!=xrot or t2!=yrot:
     #     sounds()
     return xrot, yrot
