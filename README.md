@@ -24,7 +24,8 @@ Raczej tak  <br>
 Ni chuja, wszystko się jebało  <br>
 
 **4. Czy aktualnie wszystki działa?**  <br>
-Poza końcówką robota przechodzącą przez podłogę to tak, wszystko działa <br>  
+Poza końcówką robota przechodzącą przez podłogę to tak, wszystko działa <br> 
+<i> Skróć cylinder 3 segmentu do 0.4 w articulated_arm.py + zmień w main.py w gltranslatef ostatnią wartośc na 0.55 (jeśli jest inna) lub pobierz nowe articulated_arm.py z repozytorium</i>
 
 **5. Czy zrobienie cieni jest proste?**  <br>
 Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i pod złym kątem <br>  
@@ -32,23 +33,18 @@ Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i po
 Tym samym co PythonSimpleGUI tylko darmowe z GitHuba (tak to pewnie kradzież, ale ukraść złodziejowi - to nie kradzież)
   
 <h2>wiadomość Dodo</h2>  
-Ogólnie to zacząłem projekt już coś tam kminić. ChatGPT mówi, że pygame jest spoko programem, żeby wyświetlało się okno. 
-Narysowałem na razie podstawę do robota, dwa segmenty i staw + w miarę opisałem co się dzieje. Idk czy na bieżąco powinniśmy robić dokumentacje, pewnie tak, ale chuj wie w jaki sposób.
-W każdym razie coś poszło do przodu, ale coś czuje, że plan z latającą rakietą może być marny XDD. Z wyglądem kociej łapki może jeszcze przejdzie,
-tylko zastanawiam się jak to zrobić, żeby cała tekstura się ruszała. ALbo jak w ogole wykreslic ta teksture lapy XDD
-
-Z przechodzeniem na konkretne koordynaty mam plan, żeby pozycjonowanie przechodziło po kolei od największych stopni swobody, czyli moduł obrotowy przy podstawie, potem łokieć, itd, bo przechodzenie samej końcówki na dobre koordynaty może być dosyć problematyczne.
-
-Jako, że wykorzystałem świcenie światła (żeby rozróżnic, że to jest w 3D przez cienie), to nie da się zmieniać kolorów obiektu przez  glColor3f tylko
-trzeba ustawić konkretny rodzaj materiały, odbicie itd itp ://.
-
+UWAGA WIELKI UPDATE (nie) <br>
+Masz nowe dwa pliki - Surroundings i Coordinates. Do surroundings przeniosłem wszystkie obiekty typu ściany, "rakieta", światło itd, jako, że to po prostu należy do otoczenia. W koordynatach chyba jasne, że na razie znajduje się obliczanie koordynatów i potem dodam przemieszczanie się ramienia do konkretnych. Funfact aktualnie to będziemy robić na robotyce określanie pozycji i ustawianie kątów 8)). <br>
+Także usuń sobie z pliku Articulated_arm te ściany, cokolwiek tam masz i przenieś do nowego pliku lub skorzystaj z mojego. Nie zmieniałem Ci innych plikow tutaj, bo nie mam GUI wgrane (well), a nie chce plątąc, więc musisz sam sobie pozmieniać sadly. <br>
+A i jesli chcesz zeby ci wyswietlalo koordynaty w konsoli to po prostu wywolaj funkcje position(rot1,rot2,rot3)
 <h2> OBRÓT SEGMENTÓW: </h2>
 Segment pierwszy ma zakres ruchu 0-360 stopni zgodnie z wymaganiami z zadania. Drugi i trzeci segment mają zakres 90 stopni.
 
 <h2>UKŁAD WSPÓŁRZĘDNYCH OPENGL </h2>
-Z w od ekranu
+Z od ekranu
 Y w górę
 X w prawo
+Na potrzeby projektu przyjmijmy normalny układ wspolrzednych poza obliczeniami. W sensie w prezentacji tego wszystkiego (z - góra, x - prawo, y - od ekranu) lub ewentualnie tam podmienić x z y
 
 <h2>TO DO LIST</h2>
 * Ogarnąć w jaki sposób wgrać teksturę/zrobić kocią łapkę  <br>
