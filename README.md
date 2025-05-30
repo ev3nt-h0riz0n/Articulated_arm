@@ -28,6 +28,8 @@ Poza końcówką robota przechodzącą przez podłogę to tak, wszystko działa 
 
 **5. Czy zrobienie cieni jest proste?**  <br>
 Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i pod złym kątem <br>  
+**6. Czym jest FreeSimpleGUI?** <br>
+Tym samym co PythonSimpleGUI tylko darmowe z GitHuba (tak to pewnie kradzież, ale ukraść złodziejowi - to nie kradzież)
   
 <h2>wiadomość Dodo</h2>  
 Ogólnie to zacząłem projekt już coś tam kminić. ChatGPT mówi, że pygame jest spoko programem, żeby wyświetlało się okno. 
