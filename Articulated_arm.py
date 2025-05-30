@@ -33,6 +33,70 @@ def CwiercSfery(radius):
     glDisable(GL_CLIP_PLANE1)
     glDisable(GL_CLIP_PLANE2)
     glPopMatrix()
+    
+    
+
+def draw_room(size=5):
+    """Draws a simple room with floor, ceiling, and four walls."""
+    glPushMatrix()
+    glDisable(GL_LIGHTING)  # Optional: flat color for room
+
+    # Floor
+    glColor3f(0.8, 0.8, 0.8)
+    glBegin(GL_QUADS)
+    glVertex3f(-size, 0, -size)
+    glVertex3f(size, 0, -size)
+    glVertex3f(size, 0, size)
+    glVertex3f(-size, 0, size)
+    glEnd()
+
+    # Ceiling
+    glColor3f(0.9, 0.9, 1.0)
+    glBegin(GL_QUADS)
+    glVertex3f(-size, size, -size)
+    glVertex3f(size, size, -size)
+    glVertex3f(size, size, size)
+    glVertex3f(-size, size, size)
+    glEnd()
+
+    # Walls
+    wall_colors = [(0.7, 0.7, 0.9), (0.7, 0.9, 0.7), (0.9, 0.7, 0.7), (0.9, 0.9, 0.7)]
+    # Back wall
+    glColor3fv(wall_colors[0])
+    glBegin(GL_QUADS)
+    glVertex3f(-size, 0, -size)
+    glVertex3f(size, 0, -size)
+    glVertex3f(size, size, -size)
+    glVertex3f(-size, size, -size)
+    glEnd()
+    # Front wall
+    glColor3fv(wall_colors[1])
+    glBegin(GL_QUADS)
+    glVertex3f(-size, 0, size)
+    glVertex3f(size, 0, size)
+    glVertex3f(size, size, size)
+    glVertex3f(-size, size, size)
+    glEnd()
+    # Left wall
+    glColor3fv(wall_colors[2])
+    glBegin(GL_QUADS)
+    glVertex3f(-size, 0, -size)
+    glVertex3f(-size, 0, size)
+    glVertex3f(-size, size, size)
+    glVertex3f(-size, size, -size)
+    glEnd()
+    # Right wall
+    glColor3fv(wall_colors[3])
+    glBegin(GL_QUADS)
+    glVertex3f(size, 0, -size)
+    glVertex3f(size, 0, size)
+    glVertex3f(size, size, size)
+    glVertex3f(size, size, -size)
+    glEnd()
+
+    glEnable(GL_LIGHTING)
+    glPopMatrix()
+
 
 
 
@@ -62,6 +126,7 @@ def base():
 
     gluDeleteQuadric(quadric)
     glPopMatrix()
+
 
 def Segment1(): #Obrót globalny wokół osi z
     glPushMatrix()
