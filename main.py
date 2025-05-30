@@ -7,11 +7,14 @@
 import pygame
 import OpenGL
 import random
+import threading
+import socket
 from pygame.locals import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
 from Articulated_arm import *
 from Controls import *
+
 
 def light():
         #Oświetlenie (żeby było widać, że 3D)
@@ -32,9 +35,15 @@ def light():
     glMaterialfv(GL_FRONT, GL_SPECULAR, (1.0, 1.0, 1.0, 1.0))
     glMaterialf(GL_FRONT, GL_SHININESS, 50.0) 
 
+
+
 #Ta funkcja odpowiada za całą symulację :)
 def init():
     xrot, yrot, rot1, rot2, rot3 = 0,0,0,0,0
+    rot_vars = [rot1, rot2, rot3]
+    listener_thread = threading.Thread(target=udp_listener, args=(rot_vars,), daemon=True)
+    listener_thread.start()
+    magnet_on = False  # Stan chwytaka magnetycznego
     #Inicjalizacja okna i ustawienie pozycji operatora
     pygame.init() 
     display = (800,600)
@@ -52,52 +61,83 @@ def init():
             if event.type == QUIT:
                 running = False
 
-        xrot,yrot=keyscamera(xrot,yrot)
-        rot1=Keys1(rot1)
-        rot2=Keys2(rot2)
-        rot3=Keys3(rot3)
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+        # Update from UDP listener
+        rot1 = rot_vars[0]
+        rot2 = rot_vars[1]
+        rot3 = rot_vars[2]
 
-        glPushMatrix() #Baza
+        xrot, yrot = keyscamera(xrot, yrot)
+        rot1 = Keys1(rot1)
+        rot2 = Keys2(rot2)
+        rot3 = Keys3(rot3)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        # Apply camera rotation to the whole scene (room and robot)
+        glPushMatrix()
         glRotatef(xrot, 1, 0, 0)
         glRotatef(yrot, 0, 1, 0)
+
+        draw_room(size=5)  # Draw the room
+
+        # Raise the robot above the floor (e.g., y = 0.2)
+        glPushMatrix()
+        glTranslatef(0.0, 0.01, 0.0)  # Adjust this value as needed
         base()
 
-        glPushMatrix() #1 Segment
+        glPushMatrix()  # 1 Segment
         glRotatef(rot1, 0, 1, 0)
         Segment1()
 
-        glPushMatrix() #2 Segment
+        glPushMatrix()  # 2 Segment
         glTranslatef(0.0, 0.7, 0)
         glRotatef(rot2, -1, 0, 0)
         JointSegment2()
 
-        glPushMatrix() #3 Segment
+        glPushMatrix()  # 3 Segment
         glTranslatef(0, 0, 0.7)
         glRotatef(rot3, 1, 0, 0)
         JointSegment3()
 
-        glPushMatrix() #Chwytak
-        glTranslatef(0,0.0,0.65)
+        glPushMatrix()  # Chwytak
+        glTranslatef(0, 0.0, 0.65)
         EffectorJoint()
 
-        glPopMatrix() #Koniec chwytaka
-        glPopMatrix() #Koniec 3 segmentu
-        glPopMatrix() #Koniec 2 segmentu
-        glPopMatrix() #Koniec 1 segmentu
-        glPopMatrix() #Koniec bazy
+        glPopMatrix()  # Koniec chwytaka
+        glPopMatrix()  # Koniec 3 segmentu
+        glPopMatrix()  # Koniec 2 segmentu
+        glPopMatrix()  # Koniec 1 segmentu
+        glPopMatrix()  # Koniec bazy
 
+        glPopMatrix()  # End camera rotation
+
+        # Switch to 2D mode for GUI overlay
+        glDisable(GL_DEPTH_TEST)
+        glDisable(GL_LIGHTING)
+        screen = pygame.display.get_surface()
+        glEnable(GL_DEPTH_TEST)
+        glEnable(GL_LIGHTING)
         pygame.display.flip()
+        if pygame.key.get_pressed()[pygame.K_ESCAPE]:
+            running = False
+            
         pygame.time.wait(25) #Funkcja zatrzymująca na chwilę program przed powtórzeniem pętli. Stosowane, aby program nie
         #Powodował zbyt dużego obciążenia.
     pygame.quit()
 
-print("""Symulacja ruchu robota typu articulated_arm"
-      Aby poruszać obracać kamerą należy używać strzałek.
-      Aby poruszać pierwszym segmentem używa się przycisków 1 oraz 2 (zakres ruchu 360 stopni)
-      Aby poruszać drugim segmentem używa się przycisków 3 oraz 4 (zakres ruchu 90 stopni)
+def udp_listener(rot_vars):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind((UDP_IP, UDP_PORT))
+    while True:
+        data, _ = sock.recvfrom(1024)
+        cmd = data.decode()
+        if cmd.startswith("seg1:"):
+            rot_vars[0] = int(cmd.split(":")[1])
+        elif cmd.startswith("seg2:"):
+            rot_vars[1] = int(cmd.split(":")[1])
+        elif cmd.startswith("seg3:"):
+            rot_vars[2] = int(cmd.split(":")[1])
 
+UDP_IP = "127.0.0.1"
+UDP_PORT = 5006
 
-
-      """)
 init()
