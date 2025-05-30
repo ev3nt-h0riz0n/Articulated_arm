@@ -10,18 +10,18 @@ Repozytorium w celach przechowywania plików związanych z projektem z obiektów
 na razie tylko te biblioteki wykorzystałem
 
 <h2>TYMCZASOWA OBSŁUGA PROGRAMU</h2>
-Projekt wymaga uruchomienia dwóch terminali (Terminal -> split terminal lub ctrl+shift+5). Z jednego uruchamiamy main.py z drugiego controls_window.py. Tymczasowo NIE MOŻNA ruchem ramienia z poziomu main.py (zjebałem ale to kwestia suwaków [z lekka nie dojebane]). Można main.py zamknąć naciskają ecs. Jeżeli sterowanie nie działa proszę je tymczasowo zakomentować u siebie (jeśli zmiana portu nie podziała). W razie dalszych problemów proszę kontaktować się z działem obsługi klienta (nie odpisze ci lol).
+Projekt wymaga uruchomienia dwóch terminali (Terminal -> split terminal lub ctrl+shift+5). Z jednego uruchamiamy main.py z drugiego controls_window.py. Tymczasowo NIE MOŻNA ruszać ramienia z poziomu main.py (zjebałem ale to kwestia suwaków [z lekka nie dojebane]). Można main.py zamknąć naciskają ecs. Jeżeli sterowanie nie działa proszę je tymczasowo zakomentować u siebie (jeśli zmiana portu nie podziała). W razie dalszych problemów proszę kontaktować się z działem obsługi klienta (nie odpisze ci lol).
 
 <h2>Szybkie FAQ</h2>
-1.Czy da się użyć Pygame i OpenGL w jednym oknie?  <br>
-* Nie kurwa nie da się  <br>
-2. Czy można użyć OpenGL do zrobienia GUI w tym samym oknie?  <br>
-* Raczej tak  <br>
-3. Czy GUI z pomocą OpenGL działa?  <br>
+**1.Czy da się użyć Pygame i OpenGL w jednym oknie?**  <br>
+Nie kurwa nie da się  <br>
+**2. Czy można użyć OpenGL do zrobienia GUI w tym samym oknie?**  <br>
+Raczej tak  <br>
+**3. Czy GUI z pomocą OpenGL działa?**  <br>
 Ni chuja, wszystko się jebało  <br>
-4. Czy aktualnie wszystki działa?  <br>
+**4. Czy aktualnie wszystki działa?**  <br>
 Poza końcówką robota przechodzącą przez podłogę to tak, wszystko działa <br>  
-5. Czy zrobienie cieni jest proste?  <br>
+**5. Czy zrobienie cieni jest proste?**  <br>
 Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i pod złym kątem <br>  
   
 <h2>wiadomość Dodo</h2>  
