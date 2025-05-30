@@ -15,12 +15,16 @@ Projekt wymaga uruchomienia dwóch terminali (Terminal -> split terminal lub ctr
 <h2>Szybkie FAQ</h2>
 **1.Czy da się użyć Pygame i OpenGL w jednym oknie?**  <br>
 Nie kurwa nie da się  <br>
+
 **2. Czy można użyć OpenGL do zrobienia GUI w tym samym oknie?**  <br>
 Raczej tak  <br>
+
 **3. Czy GUI z pomocą OpenGL działa?**  <br>
 Ni chuja, wszystko się jebało  <br>
+
 **4. Czy aktualnie wszystki działa?**  <br>
 Poza końcówką robota przechodzącą przez podłogę to tak, wszystko działa <br>  
+
 **5. Czy zrobienie cieni jest proste?**  <br>
 Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i pod złym kątem <br>  
   
