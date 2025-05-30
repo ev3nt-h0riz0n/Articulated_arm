@@ -14,15 +14,15 @@ Projekt wymaga uruchomienia dwóch terminali (Terminal -> split terminal lub ctr
 
 <h2>Szybkie FAQ</h2>
 1.Czy da się użyć Pygame i OpenGL w jednym oknie?  <br>
-* Nie kurwa nie da się  
-2. Czy można użyć OpenGL do zrobienia GUI w tym samym oknie?  
-* Raczej tak  
-3. Czy GUI z pomocą OpenGL działa?  
-Ni chuja, wszystko się jebało  
-4. Czy aktualnie wszystki działa?  
-Poza końcówką robota przechodzącą przez podłogę to tak, wszystko działa  
-5. Czy zrobienie cieni jest proste?  
-Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i pod złym kątem  
+* Nie kurwa nie da się  <br>
+2. Czy można użyć OpenGL do zrobienia GUI w tym samym oknie?  <br>
+* Raczej tak  <br>
+3. Czy GUI z pomocą OpenGL działa?  <br>
+Ni chuja, wszystko się jebało  <br>
+4. Czy aktualnie wszystki działa?  <br>
+Poza końcówką robota przechodzącą przez podłogę to tak, wszystko działa <br>  
+5. Czy zrobienie cieni jest proste?  <br>
+Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i pod złym kątem <br>  
   
 <h2>wiadomość Dodo</h2>  
 Ogólnie to zacząłem projekt już coś tam kminić. ChatGPT mówi, że pygame jest spoko programem, żeby wyświetlało się okno. 
@@ -44,8 +44,8 @@ Y w górę
 X w prawo
 
 <h2>TO DO LIST</h2>
-* Ogarnąć w jaki sposób wgrać teksturę/zrobić kocią łapkę  
-* Ogarnąć sysem kolicji i pobieranie globalnej lokalizacji ramienia, żeby móc je przesuwać  
-* MOŻLIWOŚĆ ZMIANY TRYBY OBSŁUGI RAMIENIA (CONTROL PANEL/MAIN)  
-* Dodać zmiany zakresu z poziomy panelu sterowania  
-* Dodać zamknięcie obu programów z poziomu panelu sterowania  
+* Ogarnąć w jaki sposób wgrać teksturę/zrobić kocią łapkę  <br>
+* Ogarnąć sysem kolicji i pobieranie globalnej lokalizacji ramienia, żeby móc je przesuwać  <br>
+* MOŻLIWOŚĆ ZMIANY TRYBY OBSŁUGI RAMIENIA (CONTROL PANEL/MAIN)  <br>
+* Dodać zmiany zakresu z poziomy panelu sterowania  <br>
+* Dodać zamknięcie obu programów z poziomu panelu sterowania  <br>
