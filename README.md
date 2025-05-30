@@ -13,7 +13,7 @@ na razie tylko te biblioteki wykorzystałem
 Projekt wymaga uruchomienia dwóch terminali (Terminal -> split terminal lub ctrl+shift+5). Z jednego uruchamiamy main.py z drugiego controls_window.py. Tymczasowo NIE MOŻNA ruchem ramienia z poziomu main.py (zjebałem ale to kwestia suwaków [z lekka nie dojebane]). Można main.py zamknąć naciskają ecs. Jeżeli sterowanie nie działa proszę je tymczasowo zakomentować u siebie (jeśli zmiana portu nie podziała). W razie dalszych problemów proszę kontaktować się z działem obsługi klienta (nie odpisze ci lol).
 
 <h2>Szybkie FAQ</h2>
-1. Czy da się użyć Pygame i OpenGL w jednym oknie?  
+1.Czy da się użyć Pygame i OpenGL w jednym oknie?  <br>
 * Nie kurwa nie da się  
 2. Czy można użyć OpenGL do zrobienia GUI w tym samym oknie?  
 * Raczej tak  
@@ -24,7 +24,7 @@ Poza końcówką robota przechodzącą przez podłogę to tak, wszystko działa
 5. Czy zrobienie cieni jest proste?  
 Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i pod złym kątem  
   
-**wiadomość Dodo**  
+<h2>wiadomość Dodo</h2>  
 Ogólnie to zacząłem projekt już coś tam kminić. ChatGPT mówi, że pygame jest spoko programem, żeby wyświetlało się okno. 
 Narysowałem na razie podstawę do robota, dwa segmenty i staw + w miarę opisałem co się dzieje. Idk czy na bieżąco powinniśmy robić dokumentacje, pewnie tak, ale chuj wie w jaki sposób.
 W każdym razie coś poszło do przodu, ale coś czuje, że plan z latającą rakietą może być marny XDD. Z wyglądem kociej łapki może jeszcze przejdzie,
