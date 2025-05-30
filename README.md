@@ -13,6 +13,7 @@ na razie tylko te biblioteki wykorzystałem
 Projekt wymaga uruchomienia dwóch terminali (Terminal -> split terminal lub ctrl+shift+5). Z jednego uruchamiamy main.py z drugiego controls_window.py. Tymczasowo NIE MOŻNA ruszać ramienia z poziomu main.py (zjebałem ale to kwestia suwaków [z lekka nie dojebane]). Można main.py zamknąć naciskają ecs. Jeżeli sterowanie nie działa proszę je tymczasowo zakomentować u siebie (jeśli zmiana portu nie podziała). W razie dalszych problemów proszę kontaktować się z działem obsługi klienta (nie odpisze ci lol).
 
 <h2>Szybkie FAQ</h2>
+
 **1.Czy da się użyć Pygame i OpenGL w jednym oknie?**  <br>
 Nie kurwa nie da się  <br>
 
