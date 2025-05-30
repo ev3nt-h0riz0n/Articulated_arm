@@ -14,7 +14,7 @@ Projekt wymaga uruchomienia dwóch terminali (Terminal -> split terminal lub ctr
 
 <h2>Szybkie FAQ</h2>
 
-**1.Czy da się użyć Pygame i OpenGL w jednym oknie?**  <br>
+**1.Czy da się wyświetlić Pygame i OpenGL w jednym oknie?**  <br>
 Nie kurwa nie da się  <br>
 
 **2. Czy można użyć OpenGL do zrobienia GUI w tym samym oknie?**  <br>
