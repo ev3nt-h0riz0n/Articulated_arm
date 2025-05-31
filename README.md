@@ -36,7 +36,9 @@ Tym samym co PythonSimpleGUI tylko darmowe z GitHuba (tak to pewnie kradzież, a
 UWAGA WIELKI UPDATE (nie) <br>
 Masz nowe dwa pliki - Surroundings i Coordinates. Do surroundings przeniosłem wszystkie obiekty typu ściany, "rakieta", światło itd, jako, że to po prostu należy do otoczenia. W koordynatach chyba jasne, że na razie znajduje się obliczanie koordynatów i potem dodam przemieszczanie się ramienia do konkretnych. Funfact aktualnie to będziemy robić na robotyce określanie pozycji i ustawianie kątów 8)). <br>
 Także usuń sobie z pliku Articulated_arm te ściany, cokolwiek tam masz i przenieś do nowego pliku lub skorzystaj z mojego. Nie zmieniałem Ci innych plikow tutaj, bo nie mam GUI wgrane (well), a nie chce plątąc, więc musisz sam sobie pozmieniać sadly. <br>
-A i jesli chcesz zeby ci wyswietlalo koordynaty w konsoli to po prostu wywolaj funkcje position(rot1,rot2,rot3)
+A i jesli chcesz zeby ci wyswietlalo koordynaty w konsoli to po prostu wywolaj funkcje position(rot1,rot2,rot3)<br>
+<br>
+Patch 31.05.25 - dodano funkcję zamykania obu programów z poziomu panelu sterowania <br>
 <h2> OBRÓT SEGMENTÓW: </h2>
 Segment pierwszy ma zakres ruchu 0-360 stopni zgodnie z wymaganiami z zadania. Drugi i trzeci segment mają zakres 90 stopni.
 
@@ -52,3 +54,4 @@ Na potrzeby projektu przyjmijmy normalny układ wspolrzednych poza obliczeniami.
 * MOŻLIWOŚĆ ZMIANY TRYBY OBSŁUGI RAMIENIA (CONTROL PANEL/MAIN)  <br>
 * Dodać zmiany zakresu z poziomy panelu sterowania  <br>
 * Dodać zamknięcie obu programów z poziomu panelu sterowania  <br>
+* Dodać DropDown do zmiany na ustalone pozycje <br>
