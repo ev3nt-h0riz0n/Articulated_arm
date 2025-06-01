@@ -6,6 +6,7 @@
 import pygame
 # from Sound import *
 from pygame.locals import *
+from Coordinates import *
 
 def keyscamera(xrot,yrot):
     t1,t2 = xrot,yrot
@@ -23,7 +24,6 @@ def keyscamera(xrot,yrot):
         xrot=-25
     if(xrot>=20):
         xrot=20
-
     #if t1!=xrot or t2!=yrot:
     #     sounds()
     return xrot, yrot
@@ -66,3 +66,21 @@ def Keys3(rot):
     #if t1!=rot:
     #    sounds()
     return rot
+
+def GetToPosition():
+    keys=pygame.key.get_pressed()
+    if keys[pygame.K_k]:
+        x = float(input("Wpisz wartosc x"))
+        y = float(input("Wpisz wartosc y"))
+        z = float(input("wpisz wartosc z"))
+        results = inversed_kinematics(x,y,z)
+        if results:
+            return (results)
+        else: None
+    else:
+        return None
+    
+def LearnMovement():
+    keys=pygame.key.get_pressed()
+    if keys[pygame.K_l]:
+        rddsaotdsa = 0
