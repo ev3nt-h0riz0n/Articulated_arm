@@ -99,7 +99,12 @@ def Rocket():
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (1.0, 1.0, 1.0, 1.0)) 
     glMaterialfv(GL_FRONT, GL_SPECULAR, (1.0, 1.0, 1.0, 1.0))
     glMaterialf(GL_FRONT, GL_SHININESS, 50.0)
-    gluSphere(quadric, 0.1, 32, 32)
+    glRotatef(90,0,0,1)
+    gluCylinder(quadric, 0.04, 0.04, 0.14, 32, 1)
+    gluDisk(quadric, 0.00, 0.04, 32, 1)
+    glTranslatef(0,0,0.14)
+    gluDisk(quadric, 0.00, 0.04, 32, 1)
+
     gluDeleteQuadric(quadric)
     glPopMatrix()
 
