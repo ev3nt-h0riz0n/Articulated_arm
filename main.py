@@ -48,6 +48,8 @@ UDP_PORT = 5006
 #Ta funkcja odpowiada za całą symulację :)
 def init():
     xrot, yrot, rot1, rot2, rot3 = 0,0,0,0,0
+    EfRot1,EfRot2,EfRot3 = 0,0,0 #Rotacja chwytaka
+
     rot_vars = [rot1, rot2, rot3]
     magnet_var = [False]
     should_exit = [False]
@@ -58,11 +60,17 @@ def init():
     #Obsluga chwytaka magnesowego
     magnet_on = False
     usedsuccesfully = False
-    mr1,mr2,mr3=0,0,0 #Sprawdzenie w jakim obrocie znajduje sie robot po upuszczeniu przedmiotu
+    mr1,mr2,mr3, mefr1,mefr2,mefr3=0,0,0,0,0,0 #Sprawdzenie w jakim obrocie znajduje sie robot po upuszczeniu przedmiotu
 
     #Do obsługi przesunięcia robota w konkretne współrzędne
     r1,r2,r3 = 0,0,0  #Sprawdzanie obecnego obrotu robota w momencie włączenia funkcji
     movingworking = 0 #Czy przesuwanie jest w toku?
+
+    #Nauka ruchu
+    learning = False
+    clicked = True
+    startingpos1,startingpos2,startingpos3 = None, None, None
+    learningmatrix = []
 
 
     #Inicjalizacja okna i ustawienie pozycji operatora
@@ -101,6 +109,7 @@ def init():
             rot1 = Keys1(rot1)
             rot2 = Keys2(rot2)
             rot3 = Keys3(rot3)
+            EfRot1,EfRot2,EfRot3 = EffectorKeys(EfRot1,EfRot2,EfRot3)
 
         #Funkcja odpowiadajaca za przemieszczenie do konkretnego punktu
         result = GetToPosition() 
@@ -112,6 +121,18 @@ def init():
         if movingworking == 1:
             rot1, rot2, rot3, movingworking = setcoordinates(r1,r2,r3,rot1,rot2,rot3)
 
+        #Mechanizm nauki robota  
+        if learning == 0:
+            startingpos1,startingpos2,startingpos3, clicked = LearnMovement(rot1,rot2,rot3)
+        if clicked == 1:
+            learningmatrix.clear()
+            learning=1
+            clicked=0
+            loops = 0
+        if learning == 1:
+            if loops<=199: #Petla pozwala przez 5 sekund sciagac obrot segmentow robota
+                learningmatrix.append([rot1,rot2,rot3,magnet_on])
+            else: learning == 0
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
@@ -142,13 +163,16 @@ def init():
 
         glPushMatrix()  # Chwytak
         glTranslatef(0, 0.0, 0.65)
+        glRotatef(EfRot1, 0, 1, 0) #Obrot prawo lewo
+        glRotatef(EfRot2, 1, 0, 0) #Obrot gora dol
+        glRotatef(EfRot3, 0, 0, 1) #Obrtót talerza dookola osi talerza
         EffectorJoint()
 
         if magnet_on: #Prymitywne dzialanie magnesu
             glTranslatef(0, -0.05, 0.19)
             Rocket()
             w1,w2,w3 = position(rot1,rot2,rot3)
-            mr1,mr2,mr3 = rot1,rot2,rot3
+            mr1,mr2,mr3,mefr1,mefr2,mefr3 = rot1,rot2,rot3, EfRot1,EfRot2,EfRot3 #mr - magnet rotations, mefr - magnet effector rotations
         elif usedsuccesfully == 1:
             glPopMatrix()
             glPopMatrix()
@@ -163,7 +187,10 @@ def init():
             glRotatef(mr2, -1, 0, 0)
             glTranslatef(0, 0, 0.7)          
             glRotatef(mr3, 1, 0, 0)
-            glTranslatef(0, 0.0, 0.65)       
+            glTranslatef(0, 0.0, 0.65)
+            glRotatef(mefr1, 0, 1, 0) #Obrot prawo lewo
+            glRotatef(mefr2, 1, 0, 0) #Obrot gora dol
+            glRotatef(mefr3, 0, 0, 1) #Obrtót talerza dookola osi talerza         
             glTranslatef(0, -0.05, 0.19)    
             Rocket()
 
@@ -195,8 +222,6 @@ def init():
         pygame.time.wait(25) #Funkcja zatrzymująca na chwilę program przed powtórzeniem pętli. Stosowane, aby program nie
         #Powodował zbyt dużego obciążenia.
     pygame.quit()
-
-
 
 
 init()
