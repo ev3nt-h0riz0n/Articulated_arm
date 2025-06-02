@@ -17,18 +17,30 @@ from Controls import *
 from Surroundings import *
 from Coordinates import *
 
-def udp_listener(rot_vars):
+def send_position_to_panel(x, y, z):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    #inny socket do wysyłania pozycji, żeby nie kolidował z odbieraniem danych
+    sock.sendto(f"pos:{x},{y},{z}".encode(), ("127.0.0.1", 5007))
+    sock.close()
+
+
+def udp_listener(rot_vars, magnet_var, should_exit):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((UDP_IP, UDP_PORT))
     while True:
         data, _ = sock.recvfrom(1024)
         cmd = data.decode()
+        if cmd == "EXIT":
+            should_exit[0] = True
+            break
         if cmd.startswith("seg1:"):
             rot_vars[0] = int(cmd.split(":")[1])
         elif cmd.startswith("seg2:"):
             rot_vars[1] = int(cmd.split(":")[1])
         elif cmd.startswith("seg3:"):
             rot_vars[2] = int(cmd.split(":")[1])
+        elif cmd.startswith("magnet:"):
+            magnet_var[0] = bool(int(cmd.split(":")[1]))
 
 UDP_IP = "127.0.0.1"
 UDP_PORT = 5006
@@ -37,7 +49,9 @@ UDP_PORT = 5006
 def init():
     xrot, yrot, rot1, rot2, rot3 = 0,0,0,0,0
     rot_vars = [rot1, rot2, rot3]
-    listener_thread = threading.Thread(target=udp_listener, args=(rot_vars,), daemon=True)
+    magnet_var = [False]
+    should_exit = [False]
+    listener_thread = threading.Thread(target=udp_listener, args=(rot_vars, magnet_var, should_exit), daemon=True)
     listener_thread.start()
 
 
@@ -64,6 +78,7 @@ def init():
     #Generowanie symulacji
     running = True
     while running:
+        magnet_on = magnet_var[0]
         for event in pygame.event.get():
             if event.type == QUIT:
                 running = False
@@ -72,7 +87,11 @@ def init():
                     magnet_on = not magnet_on
                     usedsuccesfully = True
 
-        # Update from UDP listener
+        # Sprawdzenie czy program ma się zakończyć
+        if should_exit[0]:
+            running = False
+
+        # Pozyskanie wartości obrotów z listenera
         rot1 = rot_vars[0]
         rot2 = rot_vars[1]
         rot3 = rot_vars[2]
@@ -163,7 +182,11 @@ def init():
         #Generacja osobnego obiektu (rakiety)
 
         glPopMatrix() #Kamera
-        print(position(rot1, rot2, rot3))
+        x, y, z = position(rot1, rot2, rot3)
+        
+        #wysyłanie pozycji do panelu
+        send_position_to_panel(x, y, z)
+        print((x, y, z))
 
         pygame.display.flip()
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
@@ -172,6 +195,8 @@ def init():
         pygame.time.wait(25) #Funkcja zatrzymująca na chwilę program przed powtórzeniem pętli. Stosowane, aby program nie
         #Powodował zbyt dużego obciążenia.
     pygame.quit()
+
+
 
 
 init()
