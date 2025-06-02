@@ -12,6 +12,16 @@ na razie tylko te biblioteki wykorzystałem
 <h2>TYMCZASOWA OBSŁUGA PROGRAMU</h2>
 Projekt wymaga uruchomienia dwóch terminali (Terminal -> split terminal lub ctrl+shift+5). Z jednego uruchamiamy main.py z drugiego controls_window.py. Tymczasowo NIE MOŻNA ruszać ramienia z poziomu main.py (zjebałem ale to kwestia suwaków [z lekka nie dojebane]). Można main.py zamknąć naciskają ecs. Jeżeli sterowanie nie działa proszę je tymczasowo zakomentować u siebie (jeśli zmiana portu nie podziała). W razie dalszych problemów proszę kontaktować się z działem obsługi klienta (nie odpisze ci lol).
 
+Dodatkowa obsługa: 
+Przycisk L - zaczyna się nauka na 5 sekund
+Przycisk P - odtwarza nauczone już ruchy
+Numpad:
+<ul>
+  <li>4 i 6 - lewo prawo</li>
+  <li>2 i 8 - dół góra</li>
+  <li> 7 i 9 - obrót talerza chwytaka</li>
+</ul>
+
 <h2>Szybkie FAQ</h2>
 
 **1.Czy da się wyświetlić Pygame i OpenGL w jednym oknie?**  <br>
@@ -32,26 +42,22 @@ Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i po
 **6. Czym jest FreeSimpleGUI?** <br>
 Tym samym co PythonSimpleGUI tylko darmowe z GitHuba (tak to pewnie kradzież, ale ukraść złodziejowi - to nie kradzież)
   
-<h2>wiadomość Dodo</h2>  
-UWAGA WIELKI UPDATE (nie) <br>
-Masz nowe dwa pliki - Surroundings i Coordinates. Do surroundings przeniosłem wszystkie obiekty typu ściany, "rakieta", światło itd, jako, że to po prostu należy do otoczenia. W koordynatach chyba jasne, że na razie znajduje się obliczanie koordynatów i potem dodam przemieszczanie się ramienia do konkretnych. Funfact aktualnie to będziemy robić na robotyce określanie pozycji i ustawianie kątów 8)). <br>
-Także usuń sobie z pliku Articulated_arm te ściany, cokolwiek tam masz i przenieś do nowego pliku lub skorzystaj z mojego. Nie zmieniałem Ci innych plikow tutaj, bo nie mam GUI wgrane (well), a nie chce plątąc, więc musisz sam sobie pozmieniać sadly. <br>
-A i jesli chcesz zeby ci wyswietlalo koordynaty w konsoli to po prostu wywolaj funkcje position(rot1,rot2,rot3)<br>
 <br>
 Patch 31.05.25 - dodano funkcję zamykania obu programów z poziomu panelu sterowania <br>
-<h2> OBRÓT SEGMENTÓW: </h2>
-Segment pierwszy ma zakres ruchu 0-360 stopni zgodnie z wymaganiami z zadania. Drugi i trzeci segment mają zakres 90 stopni.
+Patch 02.06.25 - dodano funkcję obrotu chwytaka numerkami numpada, dodano funkcję uczenia się ruchów L i P <br>
 
 <h2>UKŁAD WSPÓŁRZĘDNYCH OPENGL </h2>
-Z od ekranu
-Y w górę
-X w prawo
-Na potrzeby projektu przyjmijmy normalny układ wspolrzednych poza obliczeniami. W sensie w prezentacji tego wszystkiego (z - góra, x - prawo, y - od ekranu) lub ewentualnie tam podmienić x z y
+Z od ekranu <br>
+Y w górę <br>
+X w prawo <br>
+Na potrzeby projektu przyjmijmy normalny układ wspolrzednych poza obliczeniami. W sensie w prezentacji tego wszystkiego (z - góra, x - prawo, y - od ekranu) lub ewentualnie tam podmienić x z y <br>
 
 <h2>TO DO LIST</h2>
 * Ogarnąć w jaki sposób wgrać teksturę/zrobić kocią łapkę  <br>
-* Ogarnąć sysem kolicji i pobieranie globalnej lokalizacji ramienia, żeby móc je przesuwać  <br>
+* Ogarnąć system kolizji!! WAŻNE<br> 
 * MOŻLIWOŚĆ ZMIANY TRYBY OBSŁUGI RAMIENIA (CONTROL PANEL/MAIN)  <br>
 * Dodać zmiany zakresu z poziomy panelu sterowania  <br>
 * Dodać zamknięcie obu programów z poziomu panelu sterowania  <br>
 * Dodać DropDown do zmiany na ustalone pozycje <br>
+* Wykrywanie przedmiotu w pobliżu w celu uchwycenia go magnesem (na razie przedmiot jest przyciągany na milion kilometrów, a tak właściwie to się teleportuje) <br>
+* Płynne przemieszczenie się efektora przy ruchu nauczonym i zmienieniu pozycji
