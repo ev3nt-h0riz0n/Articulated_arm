@@ -63,14 +63,16 @@ def init():
     mr1,mr2,mr3, mefr1,mefr2,mefr3=0,0,0,0,0,0 #Sprawdzenie w jakim obrocie znajduje sie robot po upuszczeniu przedmiotu
 
     #Do obsługi przesunięcia robota w konkretne współrzędne
-    r1,r2,r3 = 0,0,0  #Sprawdzanie obecnego obrotu robota w momencie włączenia funkcji
     movingworking = 0 #Czy przesuwanie jest w toku?
 
     #Nauka ruchu
     learning = False
     clicked = True
-    startingpos1,startingpos2,startingpos3 = None, None, None
-    learningmatrix = []
+    startingpos =[None,None,None]
+    learning_matrix = []
+
+    #Odtwarzanie nauczonego ruchu
+    stage = [False, False] #stage[0] - przemieszczenie do startowych, [1] powtorka ruchu
 
 
     #Inicjalizacja okna i ustawienie pozycji operatora
@@ -114,25 +116,48 @@ def init():
         #Funkcja odpowiadajaca za przemieszczenie do konkretnego punktu
         result = GetToPosition() 
         if result:
-            r1,r2,r3 = result
+            goalr1,goalr2,goalr3 = result
             print(result)
             movingworking=1
         
         if movingworking == 1:
-            rot1, rot2, rot3, movingworking = setcoordinates(r1,r2,r3,rot1,rot2,rot3)
+            rot1, rot2, rot3, movingworking = setcoordinates(goalr1,goalr2,goalr3,rot1,rot2,rot3)
 
-        #Mechanizm nauki robota  
+#Mechanizm nauki robota  
         if learning == 0:
-            startingpos1,startingpos2,startingpos3, clicked = LearnMovement(rot1,rot2,rot3)
-        if clicked == 1:
-            learningmatrix.clear()
-            learning=1
-            clicked=0
-            loops = 0
-        if learning == 1:
-            if loops<=199: #Petla pozwala przez 5 sekund sciagac obrot segmentow robota
-                learningmatrix.append([rot1,rot2,rot3,magnet_on])
-            else: learning == 0
+            clicked = LearnMovement()
+        if clicked == 1: #Gdy wcisniety zostal przycisk L nauki
+            startingpos[0],startingpos[1],startingpos[2] = rot1,rot2,rot3 #Ustawiamy pozycje startowe
+            print("Uczenie rozpoczate")
+            learning_matrix.clear() 
+            learning=1 
+            learning_index = 0 
+            clicked=0 
+        if learning == 1: 
+            if learning_index<=199: #Petla pozwala przez 5 sekund sciagac obrot segmentow robota
+                learning_matrix.append([rot1,rot2,rot3,EfRot1,EfRot2,EfRot3,magnet_on])
+                learning_index+=1
+            elif learning_index==200: 
+                print("Uczenie zakonczone")
+                learning = 0
+
+        #Mechanizm odtworzenia zrobionego ruchu
+        if learning_matrix and learning == 0: #Gdy na liscie jest zapis ruchow, to:
+            played = PlayLearnedMovement()
+            if played == 1: stage[0] = 1
+            if stage[0] == 1:
+                rot1,rot2,rot3, stage[0] = setcoordinates(startingpos[0],startingpos[1],startingpos[2],rot1,rot2,rot3)
+                if stage[0] == 0: 
+                    stage[1] = 1
+                    playing_index = 0
+            if stage[1] == 1:
+                if playing_index < len(learning_matrix):
+                    rot1,rot2,rot3,EfRot1,EfRot2,EfRot3,magnet_on = learning_matrix[playing_index]
+                    playing_index+=1
+                else:
+                    print("Ruch zakonczony")
+                    stage[1] = 0
+
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
@@ -213,7 +238,6 @@ def init():
         
         #wysyłanie pozycji do panelu
         send_position_to_panel(x, y, z)
-        print((x, y, z))
 
         pygame.display.flip()
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
