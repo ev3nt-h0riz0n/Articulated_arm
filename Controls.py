@@ -67,6 +67,28 @@ def Keys3(rot):
     #    sounds()
     return rot
 
+def EffectorKeys(ef1,ef2,ef3):
+    keys=pygame.key.get_pressed()
+    if ef1<=28:
+        if keys[pygame.K_KP4]: #6 na NumPadzie
+            ef1+=2
+    if ef1>=-28:
+        if keys[pygame.K_KP6]:
+            ef1-=2
+    if ef2<=28:
+        if keys[pygame.K_KP2]:
+            ef2+=2
+    if ef2>=-28:
+        if keys[pygame.K_KP8]:
+            ef2-=2
+    if ef3<=28:
+        if keys[pygame.K_KP7]:
+            ef3+=2
+    if ef3>=-28:
+        if keys[pygame.K_KP9]:
+            ef3-=2
+    return ef1,ef2,ef3
+
 def GetToPosition():
     keys=pygame.key.get_pressed()
     if keys[pygame.K_k]:
@@ -80,7 +102,10 @@ def GetToPosition():
     else:
         return None
     
-def LearnMovement():
+def LearnMovement(rot1,rot2,rot3):
     keys=pygame.key.get_pressed()
     if keys[pygame.K_l]:
-        rddsaotdsa = 0
+        x,y,z = position(rot1,rot2,rot3)
+        return x,y,z,1
+    else:
+        return None, None, None, 0
