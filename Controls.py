@@ -102,10 +102,16 @@ def GetToPosition():
     else:
         return None
     
-def LearnMovement(rot1,rot2,rot3):
+def LearnMovement():
     keys=pygame.key.get_pressed()
     if keys[pygame.K_l]:
-        x,y,z = position(rot1,rot2,rot3)
-        return x,y,z,1
+        return 1
     else:
-        return None, None, None, 0
+        return 0
+
+def PlayLearnedMovement():
+    keys=pygame.key.get_pressed()
+    if keys[pygame.K_p]:
+        return 1
+    else: 
+        return 0
