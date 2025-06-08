@@ -7,73 +7,61 @@ from OpenGL.GLU import *
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 
-def Segment1(): #Obrót regionalny wokół osi z
-    glPushMatrix()
-    quadric=gluNewQuadric()
-    gluQuadricNormals(quadric, GLU_SMOOTH)
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (1.0, 1.0, 0.0, 1.0))  # Żółty kolor
-    glMaterialfv(GL_FRONT, GL_SPECULAR, (1.0, 1.0, 1.0, 1.0))
-    glMaterialf(GL_FRONT, GL_SHININESS, 50.0)
-    glRotatef(-90, 1, 0, 0)
-    glTranslatef(0, 0, 0.1)
-    gluCylinder(quadric, 0.2, 0.12, 0.5, 32, 4)
-    glTranslatef(0,0,0.5)
-    gluDisk(quadric, 0, 0.12, 32, 1)
-    glTranslatef(0.1 ,0.0, 0.0)
-    gluCylinder(quadric, 0.02, 0.02, 0.1, 16, 4)
-    glTranslatef(0.0 ,0.0, 0.1)
-    gluSphere(quadric, 0.02, 32,32)
-    glTranslatef(-0.2 ,0.0, 0.0)
-    gluSphere(quadric, 0.02, 32,32)
-    glTranslatef(0.0 ,0.0, -0.1)
-    gluCylinder(quadric, 0.02, 0.02, 0.1, 16, 4)
-    gluDeleteQuadric(quadric)
-    glPopMatrix()
+class RobotArm:
+    def __init__(self):
+        self.quadric=gluNewQuadric()
+        gluQuadricNormals(self.quadric, GLU_SMOOTH)
+        
+    def __del__(self):
+        gluDeleteQuadric(self.quadric)
 
-def JointSegment2():
-    glPushMatrix()
-    quadric=gluNewQuadric()
-    gluQuadricNormals(quadric, GLU_SMOOTH)
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 1.0, 0.0, 1.0)) 
-    glMaterialfv(GL_FRONT, GL_SPECULAR, (1.0, 1.0, 1.0, 1.0))
-    glMaterialf(GL_FRONT, GL_SHININESS, 50.0)
-    gluSphere(quadric, 0.1, 32, 32)
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 0.0, 1.0, 1.0))
-    glTranslatef(0.0, 0.0, 0.1)
-    gluCylinder(quadric, 0.1, 0.1, 0.5, 32, 4)
-    gluDisk(quadric, 0, 0.1, 32, 1)
-    gluDeleteQuadric(quadric)
-    glPopMatrix()
+    def set_material(self, ambient_diffuse, specular=(1.0, 1.0, 1.0, 1.0), shininess=50.0):
+        glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, ambient_diffuse)
+        glMaterialfv(GL_FRONT, GL_SPECULAR, specular)
+        glMaterialf(GL_FRONT, GL_SHININESS, shininess)
 
-def JointSegment3():
-    glPushMatrix()
-    quadric=gluNewQuadric()
-    gluQuadricNormals(quadric, GLU_SMOOTH)
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 1.0, 0.0, 1.0)) 
-    glMaterialfv(GL_FRONT, GL_SPECULAR, (1.0, 1.0, 1.0, 1.0))
-    glMaterialf(GL_FRONT, GL_SHININESS, 50.0)
-    gluSphere(quadric, 0.1, 32, 32)
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 0.0, 1.0, 1.0))
-    glTranslatef(0.0, 0.0, 0.1)
-    gluCylinder(quadric, 0.1, 0.1, 0.4, 32, 4)
-    gluDisk(quadric, 0, 0.1, 32, 1)
-    glPopMatrix()
+    def Segment(self): #Obrót regionalny wokół osi z
+        glPushMatrix()
+        self.set_material((1.0,1.0,0.0,1.0))
+        glRotatef(-90, 1, 0, 0)
+        glTranslatef(0, 0, 0.1)
+        gluCylinder(self.quadric, 0.2, 0.12, 0.5, 32, 4)
+        glTranslatef(0,0,0.5)
+        gluDisk(self.quadric, 0, 0.12, 32, 1)
 
-def EffectorJoint():
-    glPushMatrix()
-    quadric=gluNewQuadric()
-    gluQuadricNormals(quadric, GLU_SMOOTH)
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (1.0, 0.0, 0.0, 1.0)) 
-    glMaterialfv(GL_FRONT, GL_SPECULAR, (1.0, 1.0, 1.0, 1.0))
-    glMaterialf(GL_FRONT, GL_SHININESS, 50.0)
-    gluSphere(quadric, 0.1, 32, 32)
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (1.0, 0.4, 0.0, 1.0)) 
-    glTranslatef(0.0,0.0,0.1)
-    gluCylinder(quadric, 0.12,0.12,0.05,32,4)
-    gluDisk(quadric, 0, 0.12, 32, 1)
-    glPushMatrix()
-    glTranslatef(0, 0, 0.05)
-    gluDisk(quadric, 0, 0.12, 32, 1)
-    glPopMatrix()
-    gluDeleteQuadric(quadric)
-    glPopMatrix()
+        #Little handles
+        glTranslatef(0.1 ,0.0, 0.0)
+        gluCylinder(self.quadric, 0.02, 0.02, 0.1, 16, 4)
+        glTranslatef(0.0 ,0.0, 0.1)
+        gluSphere(self.quadric, 0.02, 32,32)
+        glTranslatef(-0.2 ,0.0, 0.0)
+        gluSphere(self.quadric, 0.02, 32,32)
+        glTranslatef(0.0 ,0.0, -0.1)
+        gluCylinder(self.quadric, 0.02, 0.02, 0.1, 16, 4)
+        glPopMatrix()
+
+    def JointSegment(self):
+        glPushMatrix()
+        self.set_material((0.0,1.0,0.0,1.0))
+        gluSphere(self.quadric, 0.1, 32, 32)
+        self.set_material((0.0,1.0,1.0,1.0))
+        glTranslatef(0.0, 0.0, 0.1)
+        gluCylinder(self.quadric, 0.1, 0.1, 0.5, 32, 4)
+        gluDisk(self.quadric, 0, 0.1, 32, 1)
+        glPopMatrix()
+
+    def EffectorJoint(self):
+        glPushMatrix()
+        gluSphere(self.quadric, 0.1, 32, 32)
+        self.set_material((1.0,0.2,0.0,1.0))
+        glTranslatef(0.0,0.0,0.1)
+        gluCylinder(self.quadric, 0.12,0.12,0.05,32,4)
+        gluDisk(self.quadric, 0, 0.12, 32, 1)
+        glPushMatrix()
+        glTranslatef(0, 0, 0.05)
+        gluDisk(self.quadric, 0, 0.12, 32, 1)
+        glPopMatrix()
+        glPopMatrix()
+
+
+
