@@ -57,7 +57,7 @@ def init():
     listener_thread = threading.Thread(target=udp_listener, args=(rot_vars, magnet_var, should_exit), daemon=True)
     listener_thread.start()
 
-
+    arm = RobotArm()
     #Obsluga chwytaka magnesowego
     magnet_on = False
     usedsuccesfully = False
@@ -161,6 +161,10 @@ def init():
                 if playing_index < len(learning_matrix):
                     rot1,rot2,rot3,EfRot1,EfRot2,EfRot3,magnet_on = learning_matrix[playing_index]
                     playing_index+=1
+                    #Upewnienie się, że obiekt znajduje się przy magniesie, aby go przenieść 
+                    x,y,z = position(rot1,rot2,rot3)
+                    if math.sqrt((x-object_position[0])**2+(y-object_position[2])**2+(z-object_position[1])**2)>0.15 and magnet_on ==True: 
+                        magnet_on=False
                 else:
                     print("Ruch zakonczony")
                     stage[1] = 0
@@ -181,24 +185,24 @@ def init():
 
         glPushMatrix()  # 1 Segment
         glRotatef(rot1, 0, 1, 0)
-        Segment1()
+        arm.Segment()
 
         glPushMatrix()  # 2 Segment
         glTranslatef(0.0, 0.7, 0)
         glRotatef(rot2, -1, 0, 0)
-        JointSegment2()
+        arm.JointSegment()
 
         glPushMatrix()  # 3 Segment
         glTranslatef(0, 0, 0.7)
         glRotatef(rot3, 1, 0, 0)
-        JointSegment3()
+        arm.JointSegment()
 
         glPushMatrix()  # Chwytak
         glTranslatef(0, 0.0, 0.65)
         glRotatef(EfRot1, 0, 1, 0) #Obrot prawo lewo
         glRotatef(EfRot2, 1, 0, 0) #Obrot gora dol
         glRotatef(EfRot3, 0, 0, 1) #Obrtót talerza dookola osi talerza
-        EffectorJoint()
+        arm.EffectorJoint()
 
         if magnet_on: #Prymitywne dzialanie magnesu
             glTranslatef(0, 0, 0.20)
