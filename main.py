@@ -7,6 +7,7 @@
 import pygame
 import OpenGL
 import random
+import math
 import threading
 import socket
 from pygame.locals import *
@@ -61,6 +62,7 @@ def init():
     magnet_on = False
     usedsuccesfully = False
     mr1,mr2,mr3, mefr1,mefr2,mefr3=0,0,0,0,0,0 #Sprawdzenie w jakim obrocie znajduje sie robot po upuszczeniu przedmiotu
+    object_position = [0.3,0.3,1]
 
     #Do obsługi przesunięcia robota w konkretne współrzędne
     movingworking = 0 #Czy przesuwanie jest w toku?
@@ -93,9 +95,14 @@ def init():
             if event.type == QUIT:
                 running = False
             elif event.type == KEYDOWN:
-                if event.key == K_m : 
-                    magnet_on = not magnet_on
-                    usedsuccesfully = True
+                if event.key == K_m :
+                    x,y,z = position(rot1,rot2,rot3)
+                    if magnet_on == True: 
+                        magnet_on = False
+                    elif math.sqrt((x-object_position[0])**2+(y-object_position[2])**2+(z-object_position[1])**2)<=0.15:
+                        usedsuccesfully = True
+                        magnet_on = True
+                    else: print("Obiekt poza zasiegiem przedmiotu")
 
         # Sprawdzenie czy program ma się zakończyć
         if should_exit[0]:
@@ -194,9 +201,9 @@ def init():
         EffectorJoint()
 
         if magnet_on: #Prymitywne dzialanie magnesu
-            glTranslatef(0, -0.05, 0.19)
-            Rocket()
-            w1,w2,w3 = position(rot1,rot2,rot3)
+            glTranslatef(0, 0, 0.20)
+            Object()
+            object_position[0], object_position[2], object_position[1] = position(rot1,rot2,rot3)
             mr1,mr2,mr3,mefr1,mefr2,mefr3 = rot1,rot2,rot3, EfRot1,EfRot2,EfRot3 #mr - magnet rotations, mefr - magnet effector rotations
         elif usedsuccesfully == 1:
             glPopMatrix()
@@ -216,8 +223,8 @@ def init():
             glRotatef(mefr1, 0, 1, 0) #Obrot prawo lewo
             glRotatef(mefr2, 1, 0, 0) #Obrot gora dol
             glRotatef(mefr3, 0, 0, 1) #Obrtót talerza dookola osi talerza         
-            glTranslatef(0, -0.05, 0.19)    
-            Rocket()
+            glTranslatef(0, 0, 0.20)    
+            Object()
 
 
         if magnet_on or (usedsuccesfully==0 and magnet_on == 0):
@@ -228,8 +235,8 @@ def init():
             glPopMatrix() #Koniec bazy
 
             if magnet_on==0 and usedsuccesfully==0:
-                glTranslatef(0.2, 0.3, 1)
-                Rocket()
+                glTranslatef(0.3, 0.3, 1)
+                Object()
 
         #Generacja osobnego obiektu (rakiety)
 
