@@ -7,19 +7,19 @@ from OpenGL.GLU import *
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 
-
 def Segment1(): #Obrót regionalny wokół osi z
     glPushMatrix()
     quadric=gluNewQuadric()
     gluQuadricNormals(quadric, GLU_SMOOTH)
-
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (1.0, 1.0, 0.0, 1.0))  # Żółty kolor
     glMaterialfv(GL_FRONT, GL_SPECULAR, (1.0, 1.0, 1.0, 1.0))
     glMaterialf(GL_FRONT, GL_SHININESS, 50.0)
     glRotatef(-90, 1, 0, 0)
     glTranslatef(0, 0, 0.1)
     gluCylinder(quadric, 0.2, 0.12, 0.5, 32, 4)
-    glTranslatef(0.1 ,0.0, 0.5)
+    glTranslatef(0,0,0.5)
+    gluDisk(quadric, 0, 0.12, 32, 1)
+    glTranslatef(0.1 ,0.0, 0.0)
     gluCylinder(quadric, 0.02, 0.02, 0.1, 16, 4)
     glTranslatef(0.0 ,0.0, 0.1)
     gluSphere(quadric, 0.02, 32,32)
@@ -41,6 +41,7 @@ def JointSegment2():
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 0.0, 1.0, 1.0))
     glTranslatef(0.0, 0.0, 0.1)
     gluCylinder(quadric, 0.1, 0.1, 0.5, 32, 4)
+    gluDisk(quadric, 0, 0.1, 32, 1)
     gluDeleteQuadric(quadric)
     glPopMatrix()
 
@@ -55,7 +56,7 @@ def JointSegment3():
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, (0.0, 0.0, 1.0, 1.0))
     glTranslatef(0.0, 0.0, 0.1)
     gluCylinder(quadric, 0.1, 0.1, 0.4, 32, 4)
-
+    gluDisk(quadric, 0, 0.1, 32, 1)
     glPopMatrix()
 
 def EffectorJoint():
@@ -76,6 +77,3 @@ def EffectorJoint():
     glPopMatrix()
     gluDeleteQuadric(quadric)
     glPopMatrix()
-
-
-
