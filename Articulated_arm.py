@@ -40,13 +40,23 @@ class RobotArm:
         gluCylinder(self.quadric, 0.02, 0.02, 0.1, 16, 4)
         glPopMatrix()
 
-    def JointSegment(self):
+    def JointSegment2(self):
         glPushMatrix()
         self.set_material((0.0,1.0,0.0,1.0))
         gluSphere(self.quadric, 0.1, 32, 32)
         self.set_material((0.0,1.0,1.0,1.0))
         glTranslatef(0.0, 0.0, 0.1)
         gluCylinder(self.quadric, 0.1, 0.1, 0.5, 32, 4)
+        gluDisk(self.quadric, 0, 0.1, 32, 1)
+        glPopMatrix()
+
+    def JointSegment3(self):
+        glPushMatrix()
+        self.set_material((0.0,1.0,0.0,1.0))
+        gluSphere(self.quadric, 0.1, 32, 32)
+        self.set_material((0.0,1.0,1.0,1.0))
+        glTranslatef(0.0, 0.0, 0.1)
+        gluCylinder(self.quadric, 0.1, 0.1, 0.4, 32, 4)
         gluDisk(self.quadric, 0, 0.1, 32, 1)
         glPopMatrix()
 
