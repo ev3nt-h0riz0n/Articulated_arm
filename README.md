@@ -34,3 +34,6 @@ Program umożliwia użytkownikowi sterowanie robotycznym ramieniem za pomocą kl
 
 * Wykrywanie przedmiotu w pobliżu w celu uchwycenia go magnesem (na razie przedmiot jest przyciągany na milion kilometrów, a tak właściwie to się teleportuje) <br>
 * Płynne przemieszczenie się efektora przy ruchu nauczonym i zmienieniu pozycji
+
+<h2> WYGLĄD </h2>
+<img src="docs/ScreenShot.png" alt="Wygląd programu">
