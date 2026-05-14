@@ -1,5 +1,5 @@
 <h1> Articulated_arm </h1>
-Repozytorium w celach przechowywania plików związanych z projektem z obiektówki - Animacja robota articulated_arm
+Repozytorium zawiera pliki potrzebne do zrealizowania projektu na Politechnice Gdańskiej z przedmiotu programowanie obiektowe.
 
 <h2> CEL PROJEKTU I STRESZCZENIE </h2>
 Celem projektu było zrealizowanie sterowalnej przez użytkownika wizualizacji trójwymiarowego ramienia robota typu articulated arm - robota o 3 stopniach swobody. Projekt został wykonany w języki Python z pomocą takich bibliotek jak OpenGL, FreeSimpleGUI oraz innych bibliotek wspomagających obliczenia i łączność między oknami GUI. Program wykorzystuje paradygmat programowania obiektowego – każda część ramienia została zaimplementowana jako osobna metoda w obrębie klasy reprezentującej całe ramię robota. Projekt umożliwia wizualizację ruchów ramienia w czasie rzeczywistym, a jego struktura ułatwia dalszy rozwój i rozbudowę o dodatkowe funkcjonalności.
