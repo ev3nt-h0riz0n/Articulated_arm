@@ -1,63 +1,36 @@
 <h1> Articulated_arm </h1>
 Repozytorium w celach przechowywania plików związanych z projektem z obiektówki - Animacja robota articulated_arm
 
-**Jak postawić program? Jak każdy typowy program na PS'ach**
-* Przejdź w Visual Code do folderu z programem
-* Postaw venva: python -m venv venv
-* Aktywuj venva .\venv\Scripts\activate
-* Włącz dobry interpreter pythona z venva
-* pip install pyopengl pygame
-na razie tylko te biblioteki wykorzystałem
+<h2> CEL PROJEKTU I STRESZCZENIE </h2>
+Celem projektu było zrealizowanie sterowalnej przez użytkownika wizualizacji trójwymiarowego ramienia robota typu articulated arm - robota o 3 stopniach swobody. Projekt został wykonany w języki Python z pomocą takich bibliotek jak OpenGL, FreeSimpleGUI oraz innych bibliotek wspomagających obliczenia i łączność między oknami GUI. Program wykorzystuje paradygmat programowania obiektowego – każda część ramienia została zaimplementowana jako osobna metoda w obrębie klasy reprezentującej całe ramię robota. Projekt umożliwia wizualizację ruchów ramienia w czasie rzeczywistym, a jego struktura ułatwia dalszy rozwój i rozbudowę o dodatkowe funkcjonalności.
 
-<h2>TYMCZASOWA OBSŁUGA PROGRAMU</h2>
-Projekt wymaga uruchomienia dwóch terminali (Terminal -> split terminal lub ctrl+shift+5). Z jednego uruchamiamy main.py z drugiego controls_window.py. Tymczasowo NIE MOŻNA ruszać ramienia z poziomu main.py (zjebałem ale to kwestia suwaków [z lekka nie dojebane]). Można main.py zamknąć naciskają ecs. Jeżeli sterowanie nie działa proszę je tymczasowo zakomentować u siebie (jeśli zmiana portu nie podziała). W razie dalszych problemów proszę kontaktować się z działem obsługi klienta (nie odpisze ci lol).
+<h2> STRUKTURA PROGRAMU </h2>
+* Main.py – jest to główny plik wykonawczy. Sprzęga wszystkie pozostałe pliki oraz inicjalizuje działanie całego programu.
+* Articulated_arm.py – plik zawiera funkcje klasowe. W tym pliku realizowane jest rysowanie odpowiednich elementów ramienia robota.
+* Coordinates.py – plik, w którym wykonywane są wszystkie obliczenia wymagane do określenia obecnej pozycji chwytaka, do przemieszczenia robota na konkretne koordynaty.
+* Controls.py – plik, który obsługuje sterowanie klawiaturą/interfejsem.
+* Surroundings.py – plik zawierający implementacje funkcji, które rysują obiekty dodatkowe, takie jak światło, podstawa robota, pomieszczenie oraz dodatkowy obiekt.
+* Controls_window.py - opcjonalny plik, który tworzy okno do sterowania ramieniem. Niestety w aktualnej wersji programu GUI blokuje funkcję uczenia i odtwarzania ruchów.
 
-Dodatkowa obsługa: 
-Przycisk L - zaczyna się nauka na 5 sekund
-Przycisk P - odtwarza nauczone już ruchy
-Numpad:
-<ul>
-  <li>4 i 6 - lewo prawo</li>
-  <li>2 i 8 - dół góra</li>
-  <li> 7 i 9 - obrót talerza chwytaka</li>
-</ul>
+<h2> FUNKCJONALNOŚCI </h2>
+Program umożliwia użytkownikowi sterowanie robotycznym ramieniem za pomocą klawiszy przedstawionych w rozdziale "STEROWANIE". Konkretne funkcjonalności obejmują:
+* Sterowanie widokiem kamery
+* Sterowanie trzema segmentami robota
+* Przemieszczenie chwytaka na zadane koordynaty
+* Nagrywanie ruchu oraz go odtwarzanie
+* Przenoszenie obiektu pomocniczego za pomocą chwytaka magnetycznego
 
-<h2>Szybkie FAQ</h2>
+<h2> STEROWANIE </h2>
 
-**1.Czy da się wyświetlić Pygame i OpenGL w jednym oknie?**  <br>
-Nie kurwa nie da się  <br>
+* strzałki - obsługują ruch kamery użytkownika
+* 1, 2 - obsługują obrót pierwszego segmentu robota
+* 3, 4 - obsługują obrót drugiego segmentu robota
+* 5, 6 - obsługują obrót trzeciego segmentu robota
+* L - nagrywa kolejne 5 sekund ruchu robota
+* P - odtwarza zapisany ruch (jeśli takowy został nagrany)
+* K - pozwala wprowadzić koordynaty, na które ma przemieścić się chwytak robota
+* M - włącza chwytak magnetyczny
 
-**2. Czy można użyć OpenGL do zrobienia GUI w tym samym oknie?**  <br>
-Raczej tak  <br>
 
-**3. Czy GUI z pomocą OpenGL działa?**  <br>
-Ni chuja, wszystko się jebało  <br>
-
-**4. Czy aktualnie wszystki działa?**  <br>
-Poza końcówką robota przechodzącą przez podłogę to tak, wszystko działa <br> 
-<i> Skróć cylinder 3 segmentu do 0.4 w articulated_arm.py + zmień w main.py w gltranslatef ostatnią wartośc na 0.55 (jeśli jest inna) lub pobierz nowe articulated_arm.py z repozytorium</i>
-
-**5. Czy zrobienie cieni jest proste?**  <br>
-Ani trochę, udało mi się wyświetlić część- wszystko w złym miejscu i pod złym kątem <br>  
-**6. Czym jest FreeSimpleGUI?** <br>
-Tym samym co PythonSimpleGUI tylko darmowe z GitHuba (tak to pewnie kradzież, ale ukraść złodziejowi - to nie kradzież)
-  
-<br>
-Patch 31.05.25 - dodano funkcję zamykania obu programów z poziomu panelu sterowania <br>
-Patch 02.06.25 - dodano funkcję obrotu chwytaka numerkami numpada, dodano funkcję uczenia się ruchów L i P <br>
-
-<h2>UKŁAD WSPÓŁRZĘDNYCH OPENGL </h2>
-Z od ekranu <br>
-Y w górę <br>
-X w prawo <br>
-Na potrzeby projektu przyjmijmy normalny układ wspolrzednych poza obliczeniami. W sensie w prezentacji tego wszystkiego (z - góra, x - prawo, y - od ekranu) lub ewentualnie tam podmienić x z y <br>
-
-<h2>TO DO LIST</h2>
-* Ogarnąć w jaki sposób wgrać teksturę/zrobić kocią łapkę  <br>
-* Ogarnąć system kolizji!! WAŻNE<br> 
-* MOŻLIWOŚĆ ZMIANY TRYBY OBSŁUGI RAMIENIA (CONTROL PANEL/MAIN)  <br>
-* Dodać zmiany zakresu z poziomy panelu sterowania  <br>
-* Dodać zamknięcie obu programów z poziomu panelu sterowania  <br>
-* Dodać DropDown do zmiany na ustalone pozycje <br>
 * Wykrywanie przedmiotu w pobliżu w celu uchwycenia go magnesem (na razie przedmiot jest przyciągany na milion kilometrów, a tak właściwie to się teleportuje) <br>
 * Płynne przemieszczenie się efektora przy ruchu nauczonym i zmienieniu pozycji
